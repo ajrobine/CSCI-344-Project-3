@@ -30,7 +30,9 @@ app.configure('production', function(){
 // Routes
 
 app.get('/', routes.index);
-
+app.get('/andrewrobinette', function(req, res) {
+	res.send('Welcome to the profile of Andrew Robinette');
+});
 app.get('/users/:user', routes.user);
 
 
