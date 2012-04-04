@@ -1,13 +1,20 @@
-<!DOCTYPE html>
+i<!DOCTYPE html>
 <html>
 <head>
-<script src='/public/javascripts/client.js'></script>
-<script src='jquery'></script>
-
-
+	<script src="socket.io/socket.io.js"></script>
+	<script src='/public/javascripts/client.js'></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script>var socket = io.connect("localhost");
+	  socket.on("update", function(data) {
+	  $("#"+data.key).html(data.count);
+	  });
+	</script>
 </head>
 <body>
-<h1>My Great Application!</h1>
-<%-body%>
+  <header>This is the header</header>
+
+  <div id='content'>
+	<p>This is the body of the main page!</p>
+  </div>
 </body>
 </html>

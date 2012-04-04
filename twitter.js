@@ -34,10 +34,13 @@ t.stream(
 		stream.on('data', function(tweet) {
 			console.log(tweet.text);
 			terms.forEach(function(term) {
-				if(tweet.text.match(new RegExp(term), 'i')) update(term);
+				if(tweet.text.match(/awesome/)) {
+					update(term);
 		
+				}
 			});
 		});
-	}
+	};
+
         );
 };
