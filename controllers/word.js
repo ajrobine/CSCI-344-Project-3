@@ -1,5 +1,5 @@
 var words = {};
-var client = redis.createCliet();
+var client = redis.createClient();
 
 words.index = function(req, res) {
 	client.keys('*', function(err, keys) {	
