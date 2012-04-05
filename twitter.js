@@ -3,8 +3,7 @@ var twitter = require('ntwitter');
 var redis = require('redis');
 var credentials = require('./credentials.js');
 
-function TwitterWorker(terms) {
-	var client = redis.createClient();
+var client = redis.createClient();
 
 //get twitter streaming credentials
 var t = new twitter({
@@ -29,18 +28,24 @@ var update = function(key) {
 
 t.stream(
 	'statuses/filter',
-	{ track: terms },
+	{ track: ['awesome', 'cool'] },
 	function(stream) {
 		stream.on('data', function(tweet) {
-			console.log(tweet.text);
-			terms.forEach(function(term) {
-				if(tweet.text.match(/awesome/)) {
-					update(term);
+			if(tweet.text.match(/awesome/)) {
+				if(tweet.entities.urls[0]) {
+					console.log(tweet.entities.urls[0].expanded_url);
+					client.lpush(links, tweet.entities.urls[0].expanded_url);
+					}
 		
 				}
+			if (tweet.text.match(/cool/)) {
+				if(tweet.entities.urls[0]) {
+				  console.log(tweet.entities.urls[0].expanded_url);
+				  client.lpush('cool', tweet.entities.urls[0].expanded_url);
+					}
+				}
 			});
-		});
-	};
+		};
+	);
 
-        );
-};
+        

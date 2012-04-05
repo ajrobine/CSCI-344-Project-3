@@ -6,8 +6,9 @@
 var express = require('express');
 var io = require('socket.io');
 var routes = require('./routes');
-var wordsController = require('./controllers/word.js');
+//var wordsController = require('./controllers/word.js');
 var TwitterWorker = require('./twitter.js');
+var redis = require('redis');
 
 var terms = ['awesome', 'cool', 'rad', 'gnarly', 'groovy'];
 
@@ -41,7 +42,7 @@ app.configure('production', function(){
 // Routes
 
 app.get('/', function(req, res) {
-	res.render('index.ejs', { terms: terms });
+	res.render('index.js', { terms: terms });
 });
 app.get('/andrewrobinette', function(req, res) {
 	res.render('mypage.js', {});
